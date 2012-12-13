@@ -1,0 +1,11 @@
+#!/bin/sh
+
+/sbin/stop apps/extended-power-menu
+
+sed -i 's/PowerKeyDoubleAction=dbus-signal-powerkey_double_ind/PowerKeyDoubleAction=disabled/g' /etc/mce/mce.ini
+
+echo "Restarting mce..."
+/sbin/stop mce
+/sbin/start mce
+
+exit 0
