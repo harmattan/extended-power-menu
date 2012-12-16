@@ -12,6 +12,7 @@ ProfileClient::ProfileClient(QObject *parent) : QObject(parent)
 void ProfileClient::onProfileChanged(bool changed, bool active, QString profile, QList<ProfileDataValue> values)
 {
     if (changed && active) {
+        m_activeProfile = profile;
         emit profileChanged(profile);
     }
 
@@ -63,13 +64,35 @@ QStringList ProfileClient::profileTypes()
     return profileTypes;
 }
 
+QString ProfileClient::activeProfile()
+{
+    if (m_activeProfile.isEmpty()) {
+        QDBusInterface dbus_iface(PROFILED_SERVICE, PROFILED_PATH,
+                                  PROFILED_INTERFACE);
+
+        QDBusReply<QString> reply = dbus_iface.call(PROFILED_GET_PROFILE);
+        m_activeProfile = reply.value();
+    }
+
+    return m_activeProfile;
+}
+
+QString ProfileClient::profileProperty(QString profile, QString property)
+{
+    QDBusInterface dbus_iface(PROFILED_SERVICE, PROFILED_PATH,
+                              PROFILED_INTERFACE);
+
+    // Returns true if success
+    QDBusReply<QString> reply = dbus_iface.call(PROFILED_GET_VALUE, profile, property);
+    return reply.value();
+}
+
 QStringList ProfileClient::profiles()
 {
     QDBusInterface dbus_iface(PROFILED_SERVICE, PROFILED_PATH,
                               PROFILED_INTERFACE);
 
-    QDBusReply<QStringList> reply =
-        dbus_iface.call(PROFILED_GET_PROFILES);
+    QDBusReply<QStringList> reply = dbus_iface.call(PROFILED_GET_PROFILES);
     return reply.value();
 }
 

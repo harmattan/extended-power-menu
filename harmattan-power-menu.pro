@@ -19,7 +19,11 @@ OTHER_FILES += \
     qtc_packaging/debian_harmattan/changelog \
     extended-power-menu.conf \
     qtc_packaging/debian_harmattan/postinst \
-    qtc_packaging/debian_harmattan/prerm
+    qtc_packaging/debian_harmattan/prerm \
+    icons/general.png \
+    icons/vibrate_off.png \
+    icons/vibrate_on.png \
+    icons/silent.png
 
 SOURCES += \
     main.cpp \
@@ -27,16 +31,21 @@ SOURCES += \
     powerbuttonlistener.cpp \
     msignallingwindow.cpp \
     x11wrapper.cpp \
-    profileclient.cpp
+    profileclient.cpp \
+    statebutton.cpp
 
 HEADERS += \
     powermenu.h \
     powerbuttonlistener.h \
     msignallingwindow.h \
     x11wrapper.h \
-    profileclient.h
+    profileclient.h \
+    statebutton.h
 
 autostart.path = /etc/init/apps
 autostart.files = extended-power-menu.conf
 
-INSTALLS += autostart
+icons.path = /usr/share/extended-power-menu/icons
+icons.files = icons/*
+
+INSTALLS += autostart icons

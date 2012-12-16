@@ -10,6 +10,7 @@
 #define PROFILED_PATH "/com/nokia/profiled"
 #define PROFILED_INTERFACE "com.nokia.profiled"
 #define PROFILED_GET_PROFILES "get_profiles"
+#define PROFILED_GET_PROFILE "get_profile"
 #define PROFILED_SET_PROFILE "set_profile"
 #define PROFILED_GET_VALUE "get_value"
 #define PROFILED_SET_VALUE "set_value"
@@ -44,10 +45,15 @@ public:
     static QStringList profileTypes();
     static bool setProfile(QString profileName);
     static bool setProfileProperty(QString profile, QString property, QString value);
+    QString activeProfile();
+    QString profileProperty(QString profile, QString property);
     
 signals:
     void profileChanged(QString profile);
     void propertyChanged(QString profile, QString property, QString value);
+
+private:
+    QString m_activeProfile;
     
 private slots:
     void onProfileChanged(bool changed, bool active, QString profile, QList<ProfileDataValue> values);
