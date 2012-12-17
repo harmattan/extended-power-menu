@@ -1,14 +1,13 @@
 Source: harmattan-power-menu
-Section: user/other
+Section: user/utilities
 Priority: optional
-Maintainer: Mohammad Abu-Garbeyyeh <mohammad@unknown>
+Maintainer: Mohammad Abu-Garbeyyeh <mohammad7410@gmail.com>
 Build-Depends: debhelper (>= 5), libqt4-dev
 Standards-Version: 3.7.3
-Homepage: <insert the upstream URL, if relevant>
 
 Package: harmattan-power-menu
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: <insert up to 60 chars description>
- <insert long description, indented with spaces>
-XSBC-Maemo-Display-Name: harmattan-power-menu
+Description: Extended Power Menu for Harmattan
+ Double click the power button for more options!
+XSBC-Maemo-Display-Name: Extended Power Menu
